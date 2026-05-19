@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -7,22 +6,50 @@
     <title>Aplikasi Absensi Kelas Harian</title>
 
     <style>
-        /* Mengatur tampilan body */
+        /* Background halaman dengan gambar pemandangan hijau */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
             margin: 0;
             padding: 0;
+
+            /* Background gambar */
+            background: 
+                linear-gradient(rgba(0, 100, 0, 0.5), rgba(0, 100, 0, 0.5)),
+                url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop');
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            /* Posisi tengah */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         /* Container utama */
         .container {
-            width: 400px;
-            margin: 50px auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+            width: 420px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.4);
+            animation: muncul 1s ease;
+        }
+
+        /* Animasi */
+        @keyframes muncul {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Judul */
@@ -31,9 +58,10 @@
             color: darkgreen;
         }
 
-        /* Label input */
+        /* Label */
         label {
             font-weight: bold;
+            color: #333;
         }
 
         /* Input */
@@ -42,33 +70,43 @@
             padding: 10px;
             margin-top: 5px;
             margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 2px solid green;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        /* Efek input */
+        input:focus {
+            outline: none;
+            box-shadow: 0px 0px 8px green;
         }
 
         /* Tombol */
         button {
             width: 100%;
-            padding: 10px;
-            background-color: green;
+            padding: 12px;
+            background: green;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
+            transition: 0.3s;
         }
 
-        /* Efek hover tombol */
+        /* Hover tombol */
         button:hover {
-            background-color: darkgreen;
+            background: darkgreen;
+            transform: scale(1.02);
         }
 
-        /* Box output */
+        /* Output */
         .output {
             margin-top: 20px;
+            background: #e8ffe8;
             padding: 15px;
-            background-color: #e7ffe7;
-            border-radius: 5px;
+            border-radius: 10px;
+            border-left: 5px solid green;
             display: none;
         }
     </style>
@@ -78,13 +116,13 @@
     <!-- Container utama -->
     <div class="container">
 
-        <!-- Judul aplikasi -->
-        <h1>Aplikasi Absensi Kelas Harian</h1>
+        <!-- Judul -->
+        <h1>🌿 Absensi Kelas Harian</h1>
 
-        <!-- Form absensi -->
+        <!-- Form -->
         <form id="formAbsensi">
 
-            <!-- Input nama siswa -->
+            <!-- Input nama -->
             <label>Nama Siswa</label>
             <input type="text" id="nama" placeholder="Masukkan nama siswa" required>
 
@@ -96,47 +134,53 @@
             <label>Nomor Absen</label>
             <input type="number" id="absen" placeholder="Masukkan nomor absen" required>
 
-            <!-- Input waktu absen -->
+            <!-- Input waktu -->
             <label>Waktu Absen</label>
-            <input type="text" id="waktu" placeholder="Masukkan waktu absen" required>
+            <input type="text" id="waktu" placeholder="Contoh: 07.00 WIB" required>
 
-            <!-- Tombol kirim -->
+            <!-- Tombol -->
             <button type="submit">Kirim Absensi</button>
         </form>
 
-        <!-- Tempat output -->
+        <!-- Hasil output -->
         <div id="output" class="output"></div>
 
     </div>
 
     <script>
-        // Mengambil form absensi
+        // Mengambil form
         const form = document.getElementById("formAbsensi");
 
-        // Event ketika tombol submit ditekan
+        // Event submit
         form.addEventListener("submit", function(event) {
 
-            // Mencegah halaman refresh otomatis
+            // Mencegah reload
             event.preventDefault();
 
-            // Mengambil data dari input
+            // Mengambil data input
             const nama = document.getElementById("nama").value;
             const kelas = document.getElementById("kelas").value;
             const absen = document.getElementById("absen").value;
             const waktu = document.getElementById("waktu").value;
 
-            // Mengambil elemen output
+            // Mengambil output
             const output = document.getElementById("output");
 
-            // Menampilkan hasil absensi
+            // Menampilkan hasil
             output.innerHTML = `
-                <h3>Rekap Absensi</h3>
+                <h3>📋 Rekap Absensi</h3>
+
                 <p><b>Nama Siswa:</b> ${nama}</p>
                 <p><b>Kelas:</b> ${kelas}</p>
                 <p><b>Nomor Absen:</b> ${absen}</p>
                 <p><b>Waktu Absen:</b> ${waktu}</p>
+
                 <hr>
-                <p><b>Absensi anda sudah kami terima, kami akan mengirimkan petugas terkait.</b></p>
+
+                <p>
+                ✅ <b>Absensi anda sudah kami terima,
+                kami akan mengirimkan petugas terkait.</b>
+                </p>
             `;
 
             // Menampilkan output
@@ -146,4 +190,3 @@
 
 </body>
 </html>
-```
